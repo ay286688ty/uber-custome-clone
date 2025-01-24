@@ -1,4 +1,4 @@
-const userModel = require("../models/user.model"); // Correct import
+const userModel = require("../models/user.model");
 
 module.exports.createUser = async ({
   firstname,
@@ -7,9 +7,9 @@ module.exports.createUser = async ({
   password,
 }) => {
   if (!firstname || !email || !password) {
-    throw new Error("All fields are rewquired");
+    throw new Error("All fields are required");
   }
-  const user = userModel({
+  const user = userModel.create({
     fullname: {
       firstname,
       lastname,

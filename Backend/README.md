@@ -83,9 +83,40 @@ Example:
 }
 ```
 
-### Example Response
+# User Login Endpoint
 
-Example of a successful response:
+## Endpoint
+
+`POST /users/login`
+
+## Description
+
+This endpoint is used to authenticate a user and generate a JWT token.
+
+## Request Body
+
+The request body should be a JSON object with the following properties:
+
+- `email`: A valid email address (required)
+- `password`: A string with at least 9 characters (required)
+
+Example:
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword123"
+}
+```
+
+## Responses
+
+### Success
+
+- **Status Code**: `200 OK`
+- **Body**: A JSON object containing the authentication token and user details.
+
+Example:
 
 ```json
 {
@@ -98,5 +129,108 @@ Example of a successful response:
     },
     "email": "john.doe@example.com"
   }
+}
+```
+
+### Authentication Errors
+
+- **Status Code**: `401 Unauthorized`
+- **Body**: A JSON object containing the authentication errors.
+
+Example:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid email or password",
+      "param": "email",
+      "location": "body"
+    }
+  ]
+}
+```
+
+# User Logout Endpoint
+
+## Endpoint
+
+`POST /users/logout`
+
+## Description
+
+This endpoint is used to log out a user by invalidating the JWT token.
+
+## Request Body
+
+No request body is required.
+
+## Responses
+
+### Success
+
+- **Status Code**: `200 OK`
+- **Body**: A JSON object confirming the logout.
+
+Example:
+
+```json
+{
+  "msg": "Successfully logged out"
+}
+```
+
+# User Profile Endpoint
+
+## Endpoint
+
+`GET /users/profile`
+
+## Description
+
+This endpoint is used to retrieve the profile details of the authenticated user.
+
+## Request Headers
+
+- `Authorization`: Bearer token (required)
+
+## Responses
+
+### Success
+
+- **Status Code**: `200 OK`
+- **Body**: A JSON object containing the user details.
+
+Example:
+
+```json
+{
+  "user": {
+    "_id": "user_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+### Authentication Errors
+
+- **Status Code**: `401 Unauthorized`
+- **Body**: A JSON object containing the authentication errors.
+
+Example:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid token",
+      "param": "token",
+      "location": "headers"
+    }
+  ]
 }
 ```
