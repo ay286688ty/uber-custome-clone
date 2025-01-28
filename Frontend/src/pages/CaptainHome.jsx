@@ -1,7 +1,7 @@
 import React from "react";
 
-const Home = () => {
+const CaptainHome = () => {
   return <div>IM HOME</div>;
 };
 
-export default Home;
+export default CaptainHome;
